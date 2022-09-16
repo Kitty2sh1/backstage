@@ -50,13 +50,13 @@ export default {
                         console.log(res.data);
                         if (res.data.code == 20000) {
                             localStorage.setItem('token', res.data.data.token)//存储token令牌
-                            localStorage.setItem('userInfo', res.data.data.userInfo) //存储userInfo身份
+                            localStorage.setItem('userInfo', JSON.stringify(res.data.data.userInfo)) //存储userInfo身份
                             this.$message({
                                 message: '登录成功',
                                 type: 'success'
                             });
                             this.$router.push('/')
-                        }else{
+                        } else {
                             this.$message({
                                 message: '登录失败',
                                 type: 'error'
@@ -95,6 +95,7 @@ export default {
         padding-top: 150px;
 
         h1 {
+            text-align: center;
             margin-bottom: 30px;
         }
 

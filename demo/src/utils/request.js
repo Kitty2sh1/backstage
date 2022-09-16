@@ -7,7 +7,7 @@ const instance = axios.create({
 
 var loading;
 // 添加请求拦截器
-instance.interceptors.request.use(function (config) {
+instance.interceptors.request.use( (config)=> {
     // 在发送请求之前做些什么
     loading = Loading.service({
         lock: true,
@@ -15,6 +15,10 @@ instance.interceptors.request.use(function (config) {
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)'
     });
+    let token=localStorage.getItem('token')
+    if(token){
+        config.headers.token=token
+    }
     return config;
 }, function (error) {
     // 对请求错误做些什么
@@ -22,7 +26,7 @@ instance.interceptors.request.use(function (config) {
 });
 
 // 添加响应拦截器
-instance.interceptors.response.use(function (response) {
+instance.interceptors.response.use( (response)=> {
     // 对响应数据做点什么
     loading.close()
     return response;
