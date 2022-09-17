@@ -6,17 +6,15 @@
 
 <script>
 export default {
-data() {
-return {};
-},
-methods: {},
-computed: {},
-created() {}
+  data() {
+    return {};
+  },
+  methods: {},
+  computed: {},
+  created() { }
 }
 </script>
 
 <style lang="scss" scoped>
-  .about {
-
-  }
+.about {}
 </style>

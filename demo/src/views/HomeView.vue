@@ -1,14 +1,14 @@
 <template>
   <div class="home">
     <el-container>
-      <el-aside width="200px">
-        <el-menu default-active="dashboard" class="el-menu-vertical-demo" background-color="#304156" text-color="#bfcbd9"
-          active-text-color="#ffd04b" router>
+      <el-aside :width="isCollapse?'60px':'220px'">
+        <el-menu :collapse="isCollapse" default-active="dashboard" class="el-menu-vertical-demo"
+          background-color="#304156" text-color="#bfcbd9" active-text-color="#ffd04b" router>
           <el-menu-item index="dashboard">
             <i class="el-icon-setting"></i>
             <span slot="title">主页</span>
           </el-menu-item>
-          <el-submenu :index="item.path" v-for="item in menus" :key="item.id">
+          <el-submenu :index="item.id" v-for="item in menus" :key="item.id">
             <template slot="title">
               <i :class="item.icon"></i>
               <span>{{item.title}}</span>
@@ -22,6 +22,9 @@
         </el-menu>
       </el-aside>
       <el-main>
+        <breadcrumb title="主页">
+          <i class="el-icon-s-fold" @click="isCollapse=!isCollapse"></i>
+        </breadcrumb>
         <router-view></router-view>
       </el-main>
     </el-container>
@@ -29,11 +32,16 @@
 </template>
 
 <script>
+import breadcrumb from '@/components/Breadcrumb.vue';
 import { getAside } from "../utils/index"
 export default {
+  components: {
+    breadcrumb
+  },
   data() {
     return {
-      menus: []
+      menus: [],
+      isCollapse: false
     };
   },
   methods: {},
@@ -53,7 +61,8 @@ export default {
     background-color: #D3DCE6;
     color: #333;
     height: 100vh;
-    .el-menu{
+
+    .el-menu {
       height: 100%;
     }
   }
@@ -63,6 +72,13 @@ export default {
     color: #333;
     text-align: center;
     height: 100vh;
+    padding: 0px;
+
+    .el-icon-s-fold {
+      line-height: 50px;
+      margin: 0 15px;
+      font-size: 20px;
+    }
   }
 
   body>.el-container {

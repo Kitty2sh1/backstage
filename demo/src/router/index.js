@@ -9,11 +9,19 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
-    children:[
+    children: [
       {
-        path: '/dashboard',
+        path: 'dashboard',
         name: 'dashboard',
         component: () => import('../views/Dashboard.vue')
+      }, {
+        path: 'product',
+        name: 'product',
+        component: () => import('../views/Product.vue')
+      }, {
+        path: 'order',
+        name: 'order',
+        component: () => import('../views/Order.vue')
       },
     ]
   },
