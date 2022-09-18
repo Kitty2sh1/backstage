@@ -8,12 +8,12 @@
             <i class="el-icon-setting"></i>
             <span slot="title">主页</span>
           </el-menu-item>
-          <el-submenu :index="item.id" v-for="item in menus" :key="item.id">
+          <el-submenu :index="item.path" v-for="item in menus" :key="item.id">
             <template slot="title">
               <i :class="item.icon"></i>
               <span>{{item.title}}</span>
             </template>
-            <el-menu-item :index="item.path+'/'+ele.path" v-for="ele in item.children" :key="ele.id">
+            <el-menu-item :index="ele.path" v-for="ele in item.children" :key="ele.id">
               <i :class="ele.icon"></i>
               <span>{{ele.title}}</span>
             </el-menu-item>
@@ -22,7 +22,7 @@
         </el-menu>
       </el-aside>
       <el-main>
-        <breadcrumb title="主页">
+        <breadcrumb :title="title">
           <i class="el-icon-s-fold" @click="isCollapse=!isCollapse"></i>
         </breadcrumb>
         <router-view></router-view>
@@ -40,11 +40,13 @@ export default {
   },
   data() {
     return {
-      menus: [],
-      isCollapse: false
+      menus: [],//侧边导航栏
+      isCollapse: false,//侧边导航栏状态
+      title: '主页',//面包蟹标题
     };
   },
-  methods: {},
+  methods: {
+  },
   computed: {},
   created() {
     getAside().then(res => {

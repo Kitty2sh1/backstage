@@ -14,7 +14,14 @@ const routes = [
         path: 'dashboard',
         name: 'dashboard',
         component: () => import('../views/Dashboard.vue')
-      }, {
+      },
+      {
+        path: 'list',
+        name: 'list',
+        component: () => import('../views/List.vue')
+      },
+      
+      {
         path: 'product',
         name: 'product',
         component: () => import('../views/Product.vue')
